@@ -6,7 +6,11 @@ word_list = []
 keyword_list = []
 keys = []
 encrypted_text = []
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+shifts = []
 def encrypt_text(text, key_word):
+    encrypted_string = ""
+
     for letter in text.lower():
         word_list.append(letter)
     
@@ -23,19 +27,38 @@ def encrypt_text(text, key_word):
             keys.append(keyword_list[letter_count])
         count += 1
         letter_count += 1
+    
     for key in keys:
        shift = calculate_shifts(key)
-       encrypted = encrypt_letter(key, shift)
-       encrypted_text.append(encrypted)
-    return
+       shifts.append(shift)
+    count = 0
+    for letter in word_list:
+        if word_list.index(letter) == len(shifts):
+            count = 0
+        #encrypted = encrypt_letter(letter, shifts[word_list.index(letter)])
+        encrypted = encrypt_letter(letter, shifts[count])
+        encrypted_text.append(encrypted)
+        count += 1
+    
+    
+    for letter in encrypted_text:
+        encrypted_string = encrypted_string + f"{letter}"
+    
+    return encrypted_string
 
 def encrypt_letter(character, shift):
-    diff = abs(ord(character) - shift)
-    return diff
+    letter = ''
+    if character not in alphabet:
+        letter = character
+    elif (alphabet.index(character) + shift) <= 25:
+        letter = alphabet[alphabet.index(character) + shift]
+    else:
+        letter = alphabet[(alphabet.index(character) + shift) - 26]
+    return letter
 
 
 def calculate_shifts(letter):
-    shift = ord(letter)
+    shift = alphabet.index(letter)
     return shift
 
 
