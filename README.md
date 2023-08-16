@@ -13,9 +13,9 @@ This Python script performs keyword encryption on a given text using a user-prov
 
 ## Example Output:
 
-Which text should be encrypted: secretmessage
-Which keyword should be used: keyword
-cianskpowqwuv
+- Which text should be encrypted: secretmessage
+- Which keyword should be used: keyword
+- cianskpowqwuv
 
 ## How to Use
 
